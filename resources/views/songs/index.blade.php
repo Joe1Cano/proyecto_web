@@ -36,6 +36,10 @@
     <input type="range" id="volume" min="0" max="1" step="0.01" value="0.5" oninput="setVolume()">
         <audio id="reprod" src="" type="audio/mpeg"></audio>
     <div>
+    <label for="loop-checkbox">Loop Audio</label>
+    <input type="checkbox" id="loop-checkbox" />
+    <label for="shuffle-checkbox">Shuffle Audio</label>
+    <input type="checkbox" id="shuffle-checkbox" />
     <button onclick="nextSong()">Next</button>
     <button onclick="beforeSong()">Before</button>
     <span id="current-time">0:00</span>
@@ -45,12 +49,22 @@
 </footer>
 </html>
 <script>
+let isShuffle = false;
+const audio = document.getElementById("reprod");
+const loopCheckbox = document.getElementById("loop-checkbox");
+const shuffleCheckbox = document.getElementById("shuffle-checkbox");
+loopCheckbox.addEventListener("change", () => {
+  audio.loop = loopCheckbox.checked;
+});
+shuffleCheckbox.addEventListener("change", () => {
+  isShuffle = shuffleCheckbox.checked;
+});
 var songs = "{{$songs}}";
 var decodedArrayAsString = songs.replace(/&quot;/g, '"');
 var array = JSON.parse(decodedArrayAsString);
 var idArray = array.map(obj => obj.id);
-console.log(idArray)
 var volumeControl = document.getElementById("volume");
+
 function showData(id_s) {
     var songs = "{{$songs}}";
     const decodedArrayAsString = songs.replace(/&quot;/g, '"');
@@ -66,7 +80,21 @@ function showData(id_s) {
     autor.innerText = subarray.autor;
     id = document.getElementById("id");
     id.value = subarray.id;
+    playSound();
 }
+
+  audio.addEventListener("ended", () => {
+  if (isShuffle) {
+    var id_play = document.getElementById("id");
+    id_look = id_play.value;
+    var position = idArray.indexOf(parseInt(id_look));
+    position = Math.floor(Math.random() * array.length);
+    showData(idArray[position]);
+  } else {
+    nextSong();
+    }
+  });
+
 function playSound() {
     var audio = document.getElementById("reprod");
     changeAudioSrc(audio.src)
@@ -86,7 +114,6 @@ function nextSong(){
     var position = idArray.indexOf(parseInt(id_look));
     position = (position + 1) % array.length;
     showData(idArray[position]);
-    playSound()
 }
 function beforeSong(){
     var id_play = document.getElementById("id");
@@ -94,7 +121,6 @@ function beforeSong(){
     var position = idArray.indexOf(parseInt(id_look));
     position = (position - 1 + array.length) % array.length;
     showData(idArray[position]);
-    playSound()
 }
 
 let audioSrc = "";
@@ -109,6 +135,8 @@ function loadAudio() {
   audioPlayer.load();
   duration.textContent = formatTime(audioPlayer.duration);
 }
+
+
 
 audioPlayer.addEventListener("timeupdate", function() {
   seekBar.value = (audioPlayer.currentTime / audioPlayer.duration) * 100;
