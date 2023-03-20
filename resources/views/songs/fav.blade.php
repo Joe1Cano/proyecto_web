@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canciones</title>
+    <title>Favoritas</title>
     <style>
         img{
             height: 200px;
@@ -13,20 +13,15 @@
     </style>
 </head>
 <body>
-    <h1>Canciones</h1>
-    <a href="{{route('subirSongs')}}"><button>Subir Canción</button></a>
-    <a href="./favorites"><button>Favoritos</button></a>
+    <h1>Favoritas</h1>
+    <a href="./songs"><button>Canciones</button></a>
     <table style="width:100%" border="1">
         <tr style="background-color: #CCC;"><th>Album</th><th>Cancion</th><th>Autor</th><th>Acciones</th></tr>
         @foreach ($songs as $song)
         <tr onclick=<?php echo "showData('".$song->id."')"?> >
-            <form action="./subirFav" method="get">
-            <input type="hidden" name="file" id="file" value="{{$song->archivo_au}}">
-            <td><input type="hidden" name="img" id="img" value="{{$song->foto}}"><img src=" <?php echo "http://localhost:8080/paw233/proyect_web/storage/app/public/".$song->foto ?>" ></td>
-            <td><input type="hidden" name="name" id="name" value="{{$song->nombre}}">{{$song->nombre}}</td>
-            <td><input type="hidden" name="autor" id="autor" value="{{$song->autor}}">{{$song->autor}}</td>
-            <td><button type="submit">Favoritos</button></td>
-            </form>
+            <td><img src=" <?php echo "http://localhost:8080/paw233/proyect_web/storage/app/public/".$song->foto ?>" ></td>
+            <td>{{$song->nombre}}</td>
+            <td>{{$song->autor}}</td>
         </tr>
         @endforeach
     </table>
@@ -117,22 +112,14 @@ function nextSong(){
     var id_play = document.getElementById("id");
     id_look = id_play.value;
     var position = idArray.indexOf(parseInt(id_look));
-    if (isShuffle) {
-        position = Math.floor(Math.random() * array.length);
-    } else {
-        position = (position + 1) % array.length;
-    }
+    position = (position + 1) % array.length;
     showData(idArray[position]);
 }
 function beforeSong(){
     var id_play = document.getElementById("id");
     id_look = id_play.value;
     var position = idArray.indexOf(parseInt(id_look));
-    if (isShuffle) {
-        position = Math.floor(Math.random() * array.length);
-    } else {
-        position = (position - 1 + array.length) % array.length;
-    }
+    position = (position - 1 + array.length) % array.length;
     showData(idArray[position]);
 }
 
