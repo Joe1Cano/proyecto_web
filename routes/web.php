@@ -8,3 +8,4 @@ Route::get('/', function () {
 
 Route::resource('songs', SongsController::class);
 Route::post('/subirSong', [SongsController::class,'subir'])->name("subirSong");
+Route::get('/subirSongs', [SongsController::class,'subirSongs'])->name("subirSongs");

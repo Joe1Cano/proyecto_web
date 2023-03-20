@@ -12,8 +12,11 @@ class SongsController extends Controller
      */
     public function index()
     {
-        #return view("songs.subir");
         return view("songs.index", ['songs'=> Songs::get()]);
+    }
+
+    public function subirSongs(){
+        return view("songs.subir");
     }
 
     public function subir(Request $request){
@@ -27,14 +30,7 @@ class SongsController extends Controller
         $obj->archivo_au = $file1->hashName();
         $obj->foto = $file2->hashName();
         $obj->save();
-        
-        #dd($file);
-        echo "
-        <audio controls>
-            <source src='http://localhost:8080/paw233/proyect_web/storage/app/public/".$file1->hashName()."' type='audio/mpeg'>
-        </audio>";
-        
-        echo "<img src='http://localhost:8080/paw233/proyect_web/storage/app/public/".$file2->hashName()."'/>"; 
+        return view("songs.subir");
     }
 
     /**

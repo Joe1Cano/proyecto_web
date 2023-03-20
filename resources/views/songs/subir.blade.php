@@ -10,3 +10,4 @@
     <input type="file" name="song" require><br>
     <input type="submit" value="Subir">
 </form>
+<a href="{{route('songs.index')}}">Salir</a>

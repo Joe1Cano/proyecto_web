@@ -14,6 +14,7 @@
 </head>
 <body>
     <h1>Canciones</h1>
+    <a href="{{route('subirSongs')}}"><button>Subir Canción</button></a>
     <table style="width:100%" border="1">
         <tr style="background-color: #CCC;"><th>Album</th><th>Cancion</th><th>Autor</th></tr>
         @foreach ($songs as $song)
@@ -26,7 +27,7 @@
     </table>
 </body>
 <footer>
-    <input type="text" id="id">
+    <input type="hidden" id="id">
     <h3 id="cancion"></h3>
     <h5 id="autor"></h5>
     <button onclick="playSound()">Play</button>
@@ -85,7 +86,7 @@ function nextSong(){
     var position = idArray.indexOf(parseInt(id_look));
     position = (position + 1) % array.length;
     showData(idArray[position]);
-    console.log(idArray[position])
+    playSound()
 }
 function beforeSong(){
     var id_play = document.getElementById("id");
@@ -93,7 +94,7 @@ function beforeSong(){
     var position = idArray.indexOf(parseInt(id_look));
     position = (position - 1 + array.length) % array.length;
     showData(idArray[position]);
-    console.log(idArray[position])
+    playSound()
 }
 
 let audioSrc = "";
