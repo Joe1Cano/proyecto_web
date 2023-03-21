@@ -102,7 +102,6 @@ function showData(id_s) {
 
 function playSound() {
     var audio = document.getElementById("reprod");
-    changeAudioSrc(audio.src)
     audio.play();
 }
 function pauseSound() {
@@ -149,6 +148,10 @@ function loadAudio() {
   duration.textContent = formatTime(audioPlayer.duration);
 }
 
+seekBar.addEventListener("input", function() {
+  audioPlayer.currentTime = (seekBar.value / 100) * audioPlayer.duration;
+});
+
 audioPlayer.addEventListener("timeupdate", function() {
   seekBar.value = (audioPlayer.currentTime / audioPlayer.duration) * 100;
   currentTime.textContent = formatTime(audioPlayer.currentTime);
@@ -165,8 +168,11 @@ function formatTime(time) {
 }
 
 function changeAudioSrc(newSrc) {
-  audioSrc = newSrc;
-  loadAudio();
+    audioPlayer.src = audioSrc;
+    if(audioSrc != newSrc){
+        audioSrc = newSrc;
+        loadAudio();
+    }
 }
 
 </script>
