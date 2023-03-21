@@ -111,14 +111,22 @@ function nextSong(){
     var id_play = document.getElementById("id");
     id_look = id_play.value;
     var position = idArray.indexOf(parseInt(id_look));
-    position = (position + 1) % array.length;
+    if (isShuffle) {
+        position = Math.floor(Math.random() * array.length);
+    } else {
+        position = (position + 1) % array.length;
+    }
     showData(idArray[position]);
 }
 function beforeSong(){
     var id_play = document.getElementById("id");
     id_look = id_play.value;
     var position = idArray.indexOf(parseInt(id_look));
-    position = (position - 1 + array.length) % array.length;
+    if (isShuffle) {
+        position = Math.floor(Math.random() * array.length);
+    } else {
+        position = (position - 1 + array.length) % array.length;
+    }
     showData(idArray[position]);
 }
 
