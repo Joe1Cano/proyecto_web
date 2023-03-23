@@ -1,0 +1,54 @@
+.sidenav {
+    height: 80%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+.sidenav a {
+    display: block;
+    color: #f2cee2;
+    padding: 16px;
+    text-decoration: none;
+}
+.sidenav a:hover {
+    background-color: #f2cee2;
+    color: #000;
+}
+
+.sidenav #logo {
+    margin-left: 25%;
+    margin-bottom: 50px; 
+    border-radius: 10%;
+}
+
+.sidenav-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 5px;
+    color: #f2cee2;
+}
+
+.sidenav-label #cancion {
+    font-weight: bold;
+    font-size: larger;
+}
+
+.sidenav-label #artista:hover {
+    /* background-color: #f2cee2; */
+    /* color: #000000; */
+    text-decoration: underline;
+}
+
+.sidenav-label #cancion:hover {
+    /* background-color: #f2cee2; */
+    /* color: #000000; */
+    text-decoration: underline;
+}

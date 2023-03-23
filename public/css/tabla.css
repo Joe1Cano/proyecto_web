@@ -1,0 +1,18 @@
+body #contenedor {
+    width: calc(100% - 200px);
+    height: calc(100% - 200px);
+    top: 0;
+    right: 0;
+}
+
+#contenedor .tabla {
+    position: absolute;
+    width: calc(100% - 220px);
+    left: 210px;
+    right: 10px;
+}
+
+#imgtbl {
+    width: 25px;
+    height: 25px;
+}
