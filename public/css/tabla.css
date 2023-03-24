@@ -4,15 +4,19 @@ body #contenedor {
     top: 0;
     right: 0;
 }
-
-#contenedor .tabla {
+.tabla {
     position: absolute;
     width: calc(100% - 220px);
+    height: calc(100% - 220px);
     left: 210px;
     right: 10px;
+    top: 10px;
+    box-sizing: border-box;
+    display:block;
+    overflow: auto;
 }
 
 #imgtbl {
     width: 25px;
     height: 25px;
-}
+} 

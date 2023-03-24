@@ -2,38 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Songs;
+use App\Models\Lists;
 use Illuminate\Http\Request;
 
-class SongsController extends Controller
+class ListsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view("songs.index", ['songs'=> Songs::get()]);
+        return view("songs.lists", ['songs'=> Lists::get()]);
     }
 
-    public function subirSongs(){
-        return view("songs.subir");
+    public function createList(){
+        return view("songs.create");
     }
 
-    public function subir(Request $request){
-        $file1 = $request->file("song");
-        $request->file("song")->store('public');
-        $file2 = $request->file("img");
+
+    public function subirList(Request $request){
+        $file = $request->file("img");
         $request->file("img")->store('public');
-        $obj = new Songs();
+        $obj = new Lists();
         $obj-> nombre = $request->name;
-        $obj-> autor = $request->autor;
-        $obj->archivo_au = $file1->hashName();
-        $obj->foto = $file2->hashName();
+        $obj-> id_user = 1;
+        $obj-> foto = $file->hashName();
         $obj->save();
-        
-        return redirect("listas");
+        return view("songs.lists", ['songs'=> Lists::get()]);
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -53,7 +49,7 @@ class SongsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Songs $songs)
+    public function show(Lists $lists)
     {
         //
     }
@@ -61,7 +57,7 @@ class SongsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Songs $songs)
+    public function edit(Lists $lists)
     {
         //
     }
@@ -69,7 +65,7 @@ class SongsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Songs $songs)
+    public function update(Request $request, Lists $lists)
     {
         //
     }
@@ -77,7 +73,7 @@ class SongsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Songs $songs)
+    public function destroy(Lists $lists)
     {
         //
     }

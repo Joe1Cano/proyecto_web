@@ -5,7 +5,7 @@ footer {
     bottom: 0;
     width: 100%;
     /* height: 196px; */
-    height: 20%;
+    height: calc(100%-200px);
     
 }
 
@@ -34,6 +34,13 @@ footer #cover {
 }
 
 footer #play {
+    background-color: transparent;
+    font-size: 40px;
+    padding: 5px;
+    margin: 10px;
+}
+
+footer #pause {
     background-color: transparent;
     font-size: 40px;
     padding: 5px;
@@ -87,6 +94,14 @@ footer #shuf {
     font-size: 25px;
     padding: 5px;
     color: #f2cee2;
+    margin: 5px;
+}
+
+footer #shuf:checked {
+    background-color: transparent;
+    font-size: 25px;
+    padding: 5px;
+    color: #fa79c0;
     margin: 5px;
 }
 

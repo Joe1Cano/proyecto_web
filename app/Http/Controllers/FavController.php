@@ -26,6 +26,16 @@ class FavController extends Controller
         return view("songs.index", ['songs'=> Songs::get()]);
     }
 
+    public function subirFavf(Request $request){
+        $obj = new Fav();
+        $obj-> nombre = $request->name_f;
+        $obj-> autor = $request->autor_f;
+        $obj->archivo_au = $request->file_f;
+        $obj->foto = $request->img_f;
+        $obj->save();
+        return view("songs.index", ['songs'=> Songs::get()]);
+    }
+
     public function create()
     {
         //
