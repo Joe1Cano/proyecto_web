@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
     <link rel="stylesheet" href="{{ asset('css/tabla.css') }}">
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!--css link Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <!--css link Bootstrap icons -->
@@ -39,14 +39,29 @@
             <tr id="trtbl" onclick=<?php echo "showData('".$song->id."')"?> >
                 <form action="./subirFav" method="get">
                 <input type="hidden" name="file" id="file" value="{{$song->archivo_au}}">
-                <td id='covertbl'><input type="hidden" name="img" id="img" value="{{$song->foto}}"><img id="imgtbl" src=" <?php echo "http://localhost:80/proyecto_web/storage/app/public/".$song->foto ?>" ></td>
-                <!--<td><input type="hidden" name="img" id="img" value="{{$song->foto}}"><img id="imgtbl" src=" <?php echo "http://localhost:8080/paw233/proyect_web/storage/app/public/".$song->foto ?>" ></td> -->
+                <!--<td id='covertbl'><input type="hidden" name="img" id="img" value="{{$song->foto}}"><img id="imgtbl" src=" <?php echo "http://localhost:80/proyecto_web/storage/app/public/".$song->foto ?>" ></td>-->
+                <td><input type="hidden" name="img" id="img" value="{{$song->foto}}"><img id="imgtbl" src=" <?php echo "http://localhost:8080/paw233/proyect_web/storage/app/public/".$song->foto ?>" ></td> 
                 <td><input type="hidden" name="name" id="name" value="{{$song->nombre}}"><label id="nametbl">{{$song->nombre}}</label></td>
                 <td><input type="hidden" name="autor" id="autor" value="{{$song->autor}}">{{$song->autor}}</td>
                 <td><button type="submit" id="liketbl"><span id="liketbl" class="bi bi-heart-fill"></button></td>
                 </form>
-            </tr>
-            @endforeach
+                <form class="my-form" id="form{{$song->id}}" action="./subirprueba4" method="get">
+                <input type="hidden" name="img" id="img" value="{{$song->foto}}">
+                <input type="hidden" name="file" id="file" value="{{$song->archivo_au}}">
+                <input type="hidden" name="name" id="name" value="{{$song->nombre}}">
+                <input type="hidden" name="autor" id="autor" value="{{$song->autor}}">
+                <td> 
+                <select class="mySelect" name="mySelect" id="{{$song->id}}">
+                    <option disabled selected>Selecciona una lista</option>
+                    @foreach ($listas as $lista)
+                    <option value="{{$lista->name}}">{{$lista->name}}</option>
+                    @endforeach
+                </select>
+                <button type="submit">Guardar</button>
+                </form>
+                </td>
+                </tr>
+                @endforeach
         </table>
     </div>
     </div>
@@ -57,8 +72,8 @@
             <input type="hidden" id="id">
 
             <div class="cover">
-                <img id="cover" src="http://localhost:80/proyecto_web/storage/app/public/Black.jpg" alt="">
-                <!-- <img id="cover" src="http://localhost:8080/paw233/proyect_web/storage/app/public/Black.jpg" alt=""> -->
+                <!--<img id="cover" src="http://localhost:80/proyecto_web/storage/app/public/Black.jpg" alt="">-->
+                 <img id="cover" src="http://localhost:8080/paw233/proyect_web/storage/app/public/Black.jpg" alt=""> 
             </div>
 
         <div class="footer-content">
@@ -139,15 +154,15 @@ function showData(id_s) {
     const subarray = array.find(obj => obj.id === idToFind);
     song = subarray.archivo_au;
     file = document.getElementById("reprod");
-    //file.src = "http://localhost:8080/paw233/proyect_web/storage/app/public/" + song;
-    file.src = "http://localhost:80/proyecto_web/storage/app/public/" + song;
+    file.src = "http://localhost:8080/paw233/proyect_web/storage/app/public/" + song;
+    //file.src = "http://localhost:80/proyecto_web/storage/app/public/" + song;
     song = document.getElementById("cancion");
     song.innerText = subarray.nombre;
     autor = document.getElementById("autor");
     autor.innerText = subarray.autor;
     img = document.getElementById("cover");
-    //img.src = "http://localhost:8080/paw233/proyect_web/storage/app/public/" + subarray.foto;
-    img.src = "http://localhost:80/proyecto_web/storage/app/public/" + subarray.foto;
+    img.src = "http://localhost:8080/paw233/proyect_web/storage/app/public/" + subarray.foto;
+    // img.src = "http://localhost:80/proyecto_web/storage/app/public/" + subarray.foto;
     id = document.getElementById("id");
     id.value = subarray.id;
     file_f = document.getElementById("file_f");
@@ -250,5 +265,24 @@ function changeAudioSrc(newSrc) {
         audioSrc = newSrc;
         loadAudio();
     }
+}
+
+$(document).ready(function() {
+  $('select.mySelect').change(function() {
+    var selectedValue = $(this).val();
+    var selectedID = $(this).attr('id');
+    console.log(selectedID + ' = ' + selectedValue);
+    // Do something with the selected value and ID.
+    form = document.getElementById("form"+selectedID);
+    new_word="subir"+selectedValue;
+    prueba= replaceLastWord(form.action,new_word);
+    form.action = prueba;
+  });
+});
+
+function replaceLastWord(url, newWord) {
+    const parts = url.split('/');
+    parts[parts.length - 1] = newWord;
+    return parts.join('/');
 }
 </script>

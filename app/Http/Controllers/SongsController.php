@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Songs;
 use Illuminate\Http\Request;
+use App\Models\Lists;
 
 class SongsController extends Controller
 {
@@ -12,7 +13,7 @@ class SongsController extends Controller
      */
     public function index()
     {
-        return view("songs.index", ['songs'=> Songs::get()]);
+        return view("songs.index", ['songs'=> Songs::get(),'listas'=>Lists::get()]);
     }
 
     public function subirSongs(){

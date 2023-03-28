@@ -19,9 +19,9 @@
     <table style="width:100%" border="1">
         <tr style="background-color: #CCC;"><th>Imagen</th><th>Nombre</th><th>Acciones</th></tr>
         @foreach ($songs as $song)
-        <tr onclick=<?php echo "showData('".$song->id."')"?> >
-            <td><img src=" <?php echo "http://localhost:8080/paw233/proyect_web/storage/app/public/".$song->foto ?>" ></td>
-            <td>{{$song->nombre}}</td>
+        <tr onclick="location.href='./{{$song->name}}'">
+            <td><img src=" <?php echo "http://localhost:8080/paw233/proyect_web/storage/app/public/".$song->img ?>" ></td>
+            <td>{{$song->name}}</td>
         </tr>
         @endforeach
     </table>
