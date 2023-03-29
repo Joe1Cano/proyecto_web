@@ -5,7 +5,7 @@ footer {
     bottom: 0;
     width: 100%;
     height: calc(100%-200px);
-    min-width: 1100px;
+    min-width: 1200px;
 }
 
 footer .footer-content {

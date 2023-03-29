@@ -39,8 +39,8 @@
             <tr id="trtbl" onclick=<?php echo "showData('".$song->id."')"?> >
                 <form action="./subirFav" method="get">
                 <input type="hidden" name="file" id="file" value="{{$song->archivo_au}}">
-                <!--<td id='covertbl'><input type="hidden" name="img" id="img" value="{{$song->foto}}"><img id="imgtbl" src=" <?php echo "http://localhost:80/proyecto_web/storage/app/public/".$song->foto ?>" ></td>-->
-                <td><input type="hidden" name="img" id="img" value="{{$song->foto}}"><img id="imgtbl" src=" <?php echo "http://localhost:8080/paw233/proyect_web/storage/app/public/".$song->foto ?>" ></td> 
+                <td id='covertbl'><input type="hidden" name="img" id="img" value="{{$song->foto}}"><img id="imgtbl" src=" <?php echo "http://localhost:80/proyecto_web/storage/app/public/".$song->foto ?>" ></td>
+                <!--<td><input type="hidden" name="img" id="img" value="{{$song->foto}}"><img id="imgtbl" src=" <?php echo "http://localhost:8080/paw233/proyect_web/storage/app/public/".$song->foto ?>" ></td> -->
                 <td><input type="hidden" name="name" id="name" value="{{$song->nombre}}"><label id="nametbl">{{$song->nombre}}</label></td>
                 <td><input type="hidden" name="autor" id="autor" value="{{$song->autor}}">{{$song->autor}}</td>
                 <td><button type="submit" id="liketbl"><span id="liketbl" class="bi bi-heart-fill"></button></td>
@@ -69,45 +69,45 @@
 
 
 <footer>
-            <input type="hidden" id="id">
+    <input type="hidden" id="id">
 
-            <div class="cover">
-                <!--<img id="cover" src="http://localhost:80/proyecto_web/storage/app/public/Black.jpg" alt="">-->
-                 <img id="cover" src="http://localhost:8080/paw233/proyect_web/storage/app/public/Black.jpg" alt=""> 
-            </div>
+    <div class="cover">
+        <img id="cover" src="http://localhost:80/proyecto_web/storage/app/public/Black.jpg" alt="">
+        <!--<img id="cover" src="http://localhost:8080/paw233/proyect_web/storage/app/public/Black.jpg" alt="">--> 
+    </div>
 
-        <div class="footer-content">
-            <form action="./subirFavf" method="get">
+    <div class="footer-content">
+        <form action="./subirFavf" method="get">
             <input type="hidden" name="file_f" id="file_f" value="" required>
             <!--<input type="hidden" name="img_f" id="img_f" value="{{$song->foto}}">-->
             <input type="hidden" name="img_f" id="img_f" value="" required>
             <input type="hidden" name="name_f" id="name_f" value=""required>
             <input type="hidden" name="autor_f" id="autor_f" value=""required>
             <button type="submit" id="like"><i class="bi bi-heart"></i></button>
-            </form>
-            <label>
-                <input type="checkbox" id="repeat">
-                <span class="bi bi-repeat" id="rep"></span>
-            </label>
-            <button id="sigant" onclick="beforeSong()"><i class="bi bi-rewind-fill"></i></button>
-            <button id="play" onclick="playSound()"><i id="play" class="bi bi-play-circle-fill"></i></button>
-            <button id="pause" onclick="pauseSound()" style="display: none"><i id="pause" class="bi bi-pause-circle-fill"></i></button>
-            <button id="sigant" onclick="nextSong()"><i class="bi bi-fast-forward-fill"></i></button>
-            <label>
-                <input type="checkbox" id="shuffle">
-                <span class="bi bi-shuffle" id="shuf"></span>
-            </label>
-            <span class="bi bi-volume-down-fill" id="vol"></span>
-            <input type="range" min="0" max="1" value=".5" step="0.01" class="slider" id="volumen" oninput="setVolume()">
-        </div>
+        </form>
+        <label>
+            <input type="checkbox" id="repeat">
+            <span class="bi bi-repeat" id="rep"></span>
+        </label>
+        <button id="sigant" onclick="beforeSong()"><i class="bi bi-rewind-fill"></i></button>
+        <button id="play" onclick="playSound()"><i id="play" class="bi bi-play-circle-fill"></i></button>
+        <button id="pause" onclick="pauseSound()" style="display: none"><i id="pause" class="bi bi-pause-circle-fill"></i></button>
+        <button id="sigant" onclick="nextSong()"><i class="bi bi-fast-forward-fill"></i></button>
+        <label>
+            <input type="checkbox" id="shuffle">
+            <span class="bi bi-shuffle" id="shuf"></span>
+        </label>
+        <span class="bi bi-volume-down-fill" id="vol"></span>
+        <input type="range" min="0" max="1" value=".5" step="0.01" class="slider" id="volumen" oninput="setVolume()">
+    </div>
 
-        <div class="slidercontainer">
-            <div><span id="current-time">0:00</span></div>
-            <input type="range" min="1" max="100" value="50" class="slider" id="duracion">
-            <div><span id="duration">0:00</span></div>
+    <div class="slidercontainer">
+        <div><span id="current-time">0:00</span></div>
+        <input type="range" min="1" max="500" value="250" class="slider" id="duracion"></input>
+        <div><span id="duration">0:00</span></div>
             
-                <audio id="reprod" src="" type="audio/mpeg"`style="display: none;"></audio>
-            </input>
+            <audio id="reprod" src="" type="audio/mpeg"`style="display: none;"></audio>
+            
         </div>
 </footer>
 
@@ -119,6 +119,7 @@ let isLoop = false;
 const audio = document.getElementById("reprod");
 const loopCheckbox = document.getElementById("repeat");
 const shuffleCheckbox = document.getElementById("shuffle");
+
 loopCheckbox.addEventListener("change", () => {
     isLoop = loopCheckbox.checked;
     icon = document.getElementById("rep");
@@ -154,15 +155,15 @@ function showData(id_s) {
     const subarray = array.find(obj => obj.id === idToFind);
     song = subarray.archivo_au;
     file = document.getElementById("reprod");
-    file.src = "http://localhost:8080/paw233/proyect_web/storage/app/public/" + song;
-    //file.src = "http://localhost:80/proyecto_web/storage/app/public/" + song;
+    //file.src = "http://localhost:8080/paw233/proyect_web/storage/app/public/" + song;
+    file.src = "http://localhost:80/proyecto_web/storage/app/public/" + song;
     song = document.getElementById("cancion");
     song.innerText = subarray.nombre;
     autor = document.getElementById("autor");
     autor.innerText = subarray.autor;
     img = document.getElementById("cover");
-    img.src = "http://localhost:8080/paw233/proyect_web/storage/app/public/" + subarray.foto;
-    // img.src = "http://localhost:80/proyecto_web/storage/app/public/" + subarray.foto;
+    //img.src = "http://localhost:8080/paw233/proyect_web/storage/app/public/" + subarray.foto;
+    img.src = "http://localhost:80/proyecto_web/storage/app/public/" + subarray.foto;
     id = document.getElementById("id");
     id.value = subarray.id;
     file_f = document.getElementById("file_f");
@@ -268,16 +269,16 @@ function changeAudioSrc(newSrc) {
 }
 
 $(document).ready(function() {
-  $('select.mySelect').change(function() {
-    var selectedValue = $(this).val();
-    var selectedID = $(this).attr('id');
-    console.log(selectedID + ' = ' + selectedValue);
-    // Do something with the selected value and ID.
-    form = document.getElementById("form"+selectedID);
-    new_word="subir"+selectedValue;
-    prueba= replaceLastWord(form.action,new_word);
-    form.action = prueba;
-  });
+    $('select.mySelect').change(function() {
+        var selectedValue = $(this).val();
+        var selectedID = $(this).attr('id');
+        console.log(selectedID + ' = ' + selectedValue);
+        // Do something with the selected value and ID.
+        form = document.getElementById("form"+selectedID);
+        new_word="subir"+selectedValue;
+        prueba= replaceLastWord(form.action,new_word);
+        form.action = prueba;
+    });
 });
 
 function replaceLastWord(url, newWord) {

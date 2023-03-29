@@ -1,0 +1,87 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap");
+
+.form {
+    position: absolute;
+    left: 200px;
+    width: calc(100% - 200px);
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2cee2;
+}
+
+.form form {
+    height: 500px;
+    width: 400px;
+    border-radius: 5px;
+    color: #f2cee2;
+    background-color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Raleway', sans-serif;
+}
+
+form .formbtn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnform {
+    margin: 10px;
+    display: block;
+    color: #f2cee2;
+    border: 0px #000000;
+    border-radius: 5px;
+    text-decoration: none;
+    height: 70px;
+    background-color: transparent;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnform#confirm:hover {
+    color: #00ffff;
+}
+
+.btnform#cancel:hover {
+    color: #fc2929;
+}
+
+.formbtn i {
+    font-size: 40px;
+}
+
+label i {
+    font-size: 40px;
+    margin: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+label i:hover {
+    color: #00ffff;
+    margin: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+input[type=text] {
+    border: none;
+    border-bottom: 2px solid #f2cee2;
+    background-color: transparent;
+    color: #f2cee2;
+    outline: none;
+}
+
+input[type=text]:focus {
+    box-shadow: 2px solid #f2cee2;
+}
