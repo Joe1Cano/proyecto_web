@@ -76,7 +76,7 @@ class ListsController extends Controller
     $content .= "    \$obj->archivo_au = \$request->file;\n";
     $content .= "    \$obj->foto = \$request->img;\n";
     $content .= "    \$obj->save();\n";
-    $content .= "    return view(\"songs.index\", ['songs'=> Songs::get(),'listas'=>Lists::get()]);\n";
+    $content .= "    return redirect()->route('songs.index')->with('guardar', 'Canción agregada correcta');\n";
     $content .= "}\n";
     
     $content .= "}";

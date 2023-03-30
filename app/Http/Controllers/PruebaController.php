@@ -7,17 +7,17 @@ use App\Models\Lists;
 use App\Models\Songs;
 
 use Illuminate\Http\Request;
-use App\Models\prueba1;
+use App\Models\prueba;
 
-class Prueba1Controller extends Controller
+class PruebaController extends Controller
 {
 public function index()
 {
-    return view("songs.template", ['songs'=> prueba1::get()]);
+    return view("songs.template", ['songs'=> prueba::get()]);
 }
-public function subirprueba1(Request $request)
+public function subirprueba(Request $request)
 {
-    $obj = new prueba1();
+    $obj = new prueba();
     $obj->nombre = $request->name;
     $obj->autor = $request->autor;
     $obj->archivo_au = $request->file;

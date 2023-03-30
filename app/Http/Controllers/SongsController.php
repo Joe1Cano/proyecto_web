@@ -32,7 +32,7 @@ class SongsController extends Controller
         $obj->foto = $file2->hashName();
         $obj->save();
         
-        return redirect("songs");
+        return redirect()->route('songs.index')->with('saved', 'Canción creada correctamente');
     }
 
     /**

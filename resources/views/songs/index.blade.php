@@ -12,18 +12,47 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <!--css link Bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Audiophile</title>
     <link rel="icon" href="{{ asset('logos/LogoSinNombre.png') }}" type="image/x-icon">
 </head>
 <body>
+    @if(session('success'))
+        <script>
+            Swal.fire(
+                'Inicio de Sesión!',
+                "{{ session('success') }}",
+                'success'
+            )
+        </script>
+    @endif
+    @if(session('saved'))
+        <script>
+            Swal.fire(
+                'Añadir Canción',
+                "{{ session('saved') }}",
+                'success'
+            )
+        </script>
+    @endif
+    @if(session('guardar'))
+        <script>
+            Swal.fire(
+                'Añadir a Lista',
+                "{{ session('guardar') }}",
+                'success'
+            )
+        </script>
+    @endif
     <div id="contenedor">
     <div id="navbar" class="sidenav">
         <img class="img-fluid" id="logo" src="{{ asset('logos/LogoSinNombre.png') }}" alt="" id="logo">
         <a href="./favorites"><span class="bi bi-heart-fill"></span> Favoritas</a>
         <a href="./listas"><span class="bi bi-music-note-list"></span> Playlists</a>
-        <a href="#"><span class="bi bi-person-lines-fill"> Perfil</a>
+        <a href="./perfil"><span class="bi bi-person-lines-fill"> Perfil</a>
         <a href="#"><span class="bi bi-sliders2-vertical"></span> Configuracion</a>
         <a href="./subirSongs"><span class="bi bi-plus-circle"></span> Subir canción</a>
+        <a href="./logout"><span class="bi bi-plus-circle"></span> Logout</a>
 
         <div class="sidenav-label">
             <p id="cancion"></p>
@@ -39,8 +68,8 @@
             <tr id="trtbl" onclick=<?php echo "showData('".$song->id."')"?> >
                 <form action="./subirFav" method="get">
                 <input type="hidden" name="file" id="file" value="{{$song->archivo_au}}">
-                <td id='covertbl'><input type="hidden" name="img" id="img" value="{{$song->foto}}"><img id="imgtbl" src=" <?php echo "http://localhost:80/proyecto_web/storage/app/public/".$song->foto ?>" ></td>
-                <!--<td><input type="hidden" name="img" id="img" value="{{$song->foto}}"><img id="imgtbl" src=" <?php echo "http://localhost:8080/paw233/proyect_web/storage/app/public/".$song->foto ?>" ></td> -->
+                <!--<td id='covertbl'><input type="hidden" name="img" id="img" value="{{$song->foto}}"><img id="imgtbl" src=" <?php echo "http://localhost:80/proyecto_web/storage/app/public/".$song->foto ?>" ></td> -->
+                <td id='covertbl'><input type="hidden" name="img" id="img" value="{{$song->foto}}"><img id="imgtbl" src=" <?php echo "http://localhost:8080/paw233/proyect_web/storage/app/public/".$song->foto ?>" ></td>
                 <td><input type="hidden" name="name" id="name" value="{{$song->nombre}}"><label id="nametbl">{{$song->nombre}}</label></td>
                 <td><input type="hidden" name="autor" id="autor" value="{{$song->autor}}">{{$song->autor}}</td>
                 <td><button type="submit" id="liketbl"><span id="liketbl" class="bi bi-heart-fill"></button></td>
@@ -72,8 +101,8 @@
     <input type="hidden" id="id">
 
     <div class="cover">
-        <img id="cover" src="http://localhost:80/proyecto_web/storage/app/public/Black.jpg" alt="">
-        <!--<img id="cover" src="http://localhost:8080/paw233/proyect_web/storage/app/public/Black.jpg" alt="">--> 
+        <!--<img id="cover" src="http://localhost:80/proyecto_web/storage/app/public/Black.jpg" alt="">-->
+        <img id="cover" src="http://localhost:8080/paw233/proyect_web/storage/app/public/Black.jpg" alt="">
     </div>
 
     <div class="footer-content">
@@ -103,7 +132,7 @@
 
     <div class="slidercontainer">
         <div><span id="current-time">0:00</span></div>
-        <input type="range" min="1" max="500" value="250" class="slider" id="duracion"></input>
+        <input type="range" min="1" max="100" value="50" class="slider" id="duracion"></input>
         <div><span id="duration">0:00</span></div>
             
             <audio id="reprod" src="" type="audio/mpeg"`style="display: none;"></audio>
@@ -155,15 +184,15 @@ function showData(id_s) {
     const subarray = array.find(obj => obj.id === idToFind);
     song = subarray.archivo_au;
     file = document.getElementById("reprod");
-    //file.src = "http://localhost:8080/paw233/proyect_web/storage/app/public/" + song;
-    file.src = "http://localhost:80/proyecto_web/storage/app/public/" + song;
+    file.src = "http://localhost:8080/paw233/proyect_web/storage/app/public/" + song;
+    //file.src = "http://localhost:80/proyecto_web/storage/app/public/" + song;
     song = document.getElementById("cancion");
     song.innerText = subarray.nombre;
     autor = document.getElementById("autor");
     autor.innerText = subarray.autor;
     img = document.getElementById("cover");
-    //img.src = "http://localhost:8080/paw233/proyect_web/storage/app/public/" + subarray.foto;
-    img.src = "http://localhost:80/proyecto_web/storage/app/public/" + subarray.foto;
+    img.src = "http://localhost:8080/paw233/proyect_web/storage/app/public/" + subarray.foto;
+    //img.src = "http://localhost:80/proyecto_web/storage/app/public/" + subarray.foto;
     id = document.getElementById("id");
     id.value = subarray.id;
     file_f = document.getElementById("file_f");
